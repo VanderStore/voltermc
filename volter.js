@@ -153,7 +153,7 @@ module.exports = volter = async (volter, m, chatUpdate, store) => {
             if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
 	    if (setting) {
 		if (!isNumber(setting.status)) setting.status = 0
-		if (!('autobio' in setting)) setting.autobio = true
+		if (!('autobio' in setting)) setting.autobio false
 		if (!('templateImage' in setting)) setting.templateImage = true
 		if (!('templateVideo' in setting)) setting.templateVideo = false
 		if (!('templateGif' in setting)) setting.templateGif = false
