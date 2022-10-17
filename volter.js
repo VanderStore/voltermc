@@ -24,7 +24,7 @@ const hariini = moment.tz('Asia/Jakarta').format('dddd, DD MMMM YYYY')
 const barat = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const tengah = moment.tz('Asia/Makassar').format('HH:mm:ss')
 const timur = moment.tz('Asia/Jayapura').format('HH:mm:ss')
-const nyoutube = ('®  BotVolter')  //ubah di config biar ngk emror
+const nyoutube = ('® BotVolter')  //ubah di config biar ngk emror
 const ini_mark = `0@s.whatsapp.net`
 const ownernya = ownernomer + '@s.whatsapp.net'
 
@@ -1582,7 +1582,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 	    break
 	       case 'attp': case 'ttp': {
            if (!text) throw `Example : ${prefix + command} text`
-           await voltrr.sendMedia(m.chat, `https://xteam.xyz/${command}?file&text=${text}`, 'volter', 'morou', m, {asSticker: true})
+           await volter.sendMedia(m.chat, `https://xteam.xyz/${command}?file&text=${text}`, 'volter', 'morou', m, {asSticker: true})
 
          }
          break
