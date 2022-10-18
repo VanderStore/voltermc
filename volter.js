@@ -1407,38 +1407,41 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
 ╰────────────────⊱
 
 *⛦ RUNTIME SERVER ⛦*
- ${runtime(process.uptime())}
+${runtime(process.uptime())}
  
-*OTHERS MENU*
- › ${prefix}rules
- › ${prefix}sewabot
+╭──❲ *OTHERS MENU* ❳
+│ › ${prefix}rules
+│ › ${prefix}sewabot
+╰────────────────⊱
+
+╭──❲ *CONVERT MENU* ❳
+│ › ${prefix}toimage
+│ › ${prefix}sticker
+│ › ${prefix}removebg
+│ › ${prefix}tourl
+│ › ${prefix}togif
+│ › ${prefix}tovideo
+│ › ${prefix}tovn
+│ › ${prefix}smeme
+│ › ${prefix}toaudio
+╰────────────────⊱
  
- CONVERT MENU*
- › ${prefix}toimage
- › ${prefix}sticker
- › ${prefix}removebg
- › ${prefix}tourl
- › ${prefix}togif
- › ${prefix}tovideo
- › ${prefix}tovn
- › ${prefix}smeme
- › ${prefix}toaudio
- 
-*GROUP MENU*
- › ${prefix}linkgroup
- › ${prefix}ephemeral 
- › ${prefix}setppgc
- › ${prefix}setname 
- › ${prefix}setdesc 
- › ${prefix}group
- › ${prefix}editinfo 
- › ${prefix}kick 
- › ${prefix}hidetag 
- › ${prefix}tagall 
- › ${prefix}antilink 
- › ${prefix}mute
- › ${prefix}promote
- › ${prefix}demote`
+╭──❲ *CONVERT MENU* ❳
+│ › ${prefix}linkgroup
+│ › ${prefix}ephemeral 
+│ › ${prefix}setppgc
+│ › ${prefix}setname 
+│ › ${prefix}setdesc 
+│ › ${prefix}group
+│ › ${prefix}editinfo 
+│ › ${prefix}kick 
+│ › ${prefix}hidetag 
+│ › ${prefix}tagall 
+│ › ${prefix}antilink 
+│ › ${prefix}mute
+│ › ${prefix}promote
+│ › ${prefix}demote
+╰────────────────⊱`
             let ments = [ownernya, me, ini_mark]
             let buttons = [{ buttonId: 'owner', buttonText: { displayText: '⌕ Owner' }, type: 1 },{ buttonId: 'ping', buttonText: { displayText: '⌕ Info Bot' }, type: 1 }]
             await volter.sendButtonText(m.chat, buttons, jawab, nyoutube, m, {mentions: ments, quoted: fkontak})
