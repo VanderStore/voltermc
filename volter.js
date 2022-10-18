@@ -1393,7 +1393,7 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
 │ › ${prefix}smeme
 ╰────────────────⊱
  
-╭──❲ *CONVERT MENU* ❳
+╭──❲ *GROUP MENU* ❳
 │ › ${prefix}linkgroup
 │ › ${prefix}ephemeral 
 │ › ${prefix}setppgc
