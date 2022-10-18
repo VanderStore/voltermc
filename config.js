@@ -1,5 +1,5 @@
 /**
-   * Create By Dika Ardnt.
+   * Create By Volter Store
 */
 
 const fs = require('fs')
@@ -16,9 +16,9 @@ global.APIKeys = {
 }
 
 // Other
-global.owner = ['12053901620']
-global.ownernomer = "12053901620"
-global.premium = ['12053901620','12053901620']
+global.owner = ['Volter Developer']
+global.ownernomer = "12053405193"
+global.premium = ['12053405193','12053405193']
 global.packname = 'Bot'
 global.author = 'Volter'
 global.sessionName = 'volter'
