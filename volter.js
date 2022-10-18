@@ -688,7 +688,6 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		await volter.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	}
-	}
 	break
 	case 'promote': {
 		if (!m.isGroup) throw mess.group
