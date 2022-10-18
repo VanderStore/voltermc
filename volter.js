@@ -600,8 +600,8 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             }
             }
             break
-	    case 'donasi': case 'sewabot': case 'sewa': case 'buypremium': case 'donate': {
-                volter.sendMessage(m.chat, { image: { url: '' }, caption: `*${ucapanWaktu} Kak ${m.pushName}*\n\n *Jika ingin berdonasi silahkan scan gambar diatas*\n\n*Jika ingin sewa bot atau premium*\n*Silahkan Chat Owner*\n\n*Atau klik link dibawah ini*\n_https://saweria.co/\n\n*Atau Transfer via*\n- *Gopay Dana Ovo Qris ShopeePay*\n chat nomor berikut : wa.me/12053901620\n\n_Terima kasih_` }, { quoted: m })
+	    case 'sewabot': {
+                volter.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/e1125e91d75c52e653187.jpg' }, caption: `*List*\n*Sewa Botz*\n\n*➪ Perminggu : 1K*\n*➪ Perbulan : 2K*\n*➪ Permanen : 4K*\n\n_Note : permanen sampai admin pensi_` }, { quoted: m })
             }
             break 
             case 'chat': {
@@ -1267,16 +1267,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 await fs.unlinkSync(media)
             }
             break
-            case 'toaud': case 'toaudio': {
-            if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
-            if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
-            let media = await quoted.download()
-            let { toAudio } = require('./lib/converter')
-            let audio = await toAudio(media, 'mp4')
-            volter.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
-            }
-            break
             case 'tomp3': {
             if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
@@ -1286,27 +1276,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
             volter.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert By ${volter.user.name}.mp3`}, { quoted : m })
-            }
-            break
-            case 'tovn': case 'toptt': {
-            if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
-            if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
-            let media = await quoted.download()
-            let { toPTT } = require('./lib/converter')
-            let audio = await toPTT(media, 'mp4')
-            volter.sendMessage(m.chat, {audio: audio, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
-            }
-            break
-            case 'togif': {
-                if (!quoted) throw 'Reply Image'
-                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
-		let { webp2mp4File } = require('./lib/uploader')
-                let media = await volter.downloadAndSaveMediaMessage(quoted)
-                let webpToMp4 = await webp2mp4File(media)
-                await volter.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
-                await fs.unlinkSync(media)
             }
             break
 	        case 'tourl': {
@@ -1407,7 +1376,7 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
 ╰────────────────⊱
 
 *⛦ RUNTIME SERVER ⛦*
-${runtime(process.uptime())}
+ ${runtime(process.uptime())}
  
 ╭──❲ *OTHERS MENU* ❳
 │ › ${prefix}rules
@@ -1421,9 +1390,7 @@ ${runtime(process.uptime())}
 │ › ${prefix}tourl
 │ › ${prefix}togif
 │ › ${prefix}tovideo
-│ › ${prefix}tovn
 │ › ${prefix}smeme
-│ › ${prefix}toaudio
 ╰────────────────⊱
  
 ╭──❲ *CONVERT MENU* ❳
