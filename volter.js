@@ -1178,6 +1178,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             
 //PEMBATAS=================VOLTER======================
             case 'sticker': case 's': case 'stickergif': case 'sgif': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
             if (!quoted) throw `*Balas Video/Image Dengan Caption* ${prefix + command}`
             m.reply(mess.wait)
                     if (/image/.test(mime)) {
@@ -1195,6 +1197,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
          case 'emojimix': {
+         if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
 		let [emoji1, emoji2] = text.split`+`
 		if (!emoji1) throw `Example : ${prefix + command} 😅+🤔`
 		if (!emoji2) throw `Example : ${prefix + command} 😅+🤔`
@@ -1206,6 +1210,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 	    }
 	    break
 	    case 'emojimix2': {
+	    if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
 	    if (!text) throw `Example : ${prefix + command} 😅`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(text)}`)
 		for (let res of anu.results) {
@@ -1215,6 +1221,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 	    }
          break
          case 'tts': {
+         if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
          	if (!text) throw `Example : ${prefix + command} text`
              let tts = await fetchJson(`https://api.akuari.my.id/texttovoice/texttosound_id?query=${text}`)
              volter.sendMessage(m.chat, { audio: { url: tts.result }, mimetype: 'audio/mpeg', fileName: `${text}.mp3` }, { quoted: fvn })
@@ -1242,6 +1250,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'toimage': case 'toimg': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `Balas sticker dengan caption *${prefix + command}*`
                 m.reply(mess.wait)
@@ -1257,6 +1267,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
 	        case 'tomp4': case 'tovideo': {
+	        if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
                 m.reply(mess.wait)
@@ -1279,6 +1291,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
 	        case 'tourl': {
+	        if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 5 // -5 limit
                 m.reply(mess.wait)
 		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
                 let media = await volter.downloadAndSaveMediaMessage(quoted)
@@ -1328,32 +1342,8 @@ rules = `┌──⭓ *Rules BOT*
 │ *No Spam & Telp❗*
 │
 └───────𖦹Ꜥꜥ`
-let buttons = [{ buttonId: 'allmenu', buttonText: { displayText: '⌕ List Menu' }, type: 1 },{ buttonId: 'donasi', buttonText: { displayText: '👑Sewa' }, type: 1 }]
+let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' }, type: 1 },{ buttonId: 'sewabot', buttonText: { displayText: '👑Sewa' }, type: 1 }]
             await volter.sendButtonText(m.chat, buttons, rules, nyoutube, m, {quoted: fkontak})
-            }
-            break
-            case 'spokfktkfnsor': {
-            if (!m.isGroup) throw mess.group
-            let qontak = `6285718971848@s.whatsapp.net`
-let dana = `6281911500445@s.whatsapp.net`
-let shopeeotp = `6285574670796@s.whatsapp.net`
-let shopee = `622150996855@s.whatsapp.net`
-let tokopedia = `6281197911081@s.whatsapp.net`
-let smartfrend = `628881212888@s.whatsapp.net`
-let getcontact = `447990653714@s.whatsapp.net`
-let facebook = `447710173736@s.whatsapp.net`
-let pasarpolis = `6287700178000@s.whatsapp.net`
-let kominfo = `628119224545@s.whatsapp.net`
-let alfamart = `628111500959@s.whatsapp.net`
-            let ownernya = ownernomer + '@s.whatsapp.net'
-            let me = m.sender
-            let jawab = `*Bot by Volter Store* 
--Creator :  @${ownernya.split('@')[0]}\n-Lu : @${me.split('@')[0]}\n-Powered  : @${ini_mark.split('@')[0]}\n- :  @${qontak.split('@')[0]}\n- :  @${dana.split('@')[0]}\n- :  @${shopeeotp.split('@')[0]}\n- :  @${shopee.split('@')[0]}\n- :  @${tokopedia.split('@')[0]}\n- :  @${smartfrend.split('@')[0]}\n- :  @${getcontact.split('@')[0]}\n- :  @${facebook.split('@')[0]}\n- :  @${pasarpolis.split('@')[0]}\n- :  @${getcontact.split('@')[0]}\n- :  @${kominfo.split('@')[0]}\n- :  @${alfamart.split('@')[0]}`
-            let ments = [ownernya, me, ini_mark, qontak, dana, shopeeotp, shopee, tokopedia, smartfrend, getcontact, facebook, pasarpolis, kominfo, alfamart]
-            let buttons = [
-                        { buttonId: 'allmenu', buttonText: { displayText: '⌕ List Menu' }, type: 1 }
-                    ]
-                    await volter.sendButtonText(m.chat, buttons, jawab, volter.user.name, m, {mentions: ments})
             }
             break
             case 'menu': {
@@ -1393,21 +1383,21 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
 │ › ${prefix}smeme
 ╰────────────────⊱
  
-╭──❲ *GROUP MENU* ❳
+╭──❲ *CONVERT MENU* ❳
 │ › ${prefix}linkgroup
 │ › ${prefix}ephemeral 
-│ › ${prefix}setppgc
-│ › ${prefix}setname 
-│ › ${prefix}setdesc 
-│ › ${prefix}group
+│ › ${prefix}setppgc [ reply image }
+│ › ${prefix}setname [ text ]
+│ › ${prefix}setdesc [ text ]
+│ › ${prefix}group [ open / close ]
 │ › ${prefix}editinfo 
-│ › ${prefix}kick 
-│ › ${prefix}hidetag 
-│ › ${prefix}tagall 
-│ › ${prefix}antilink 
-│ › ${prefix}mute
-│ › ${prefix}promote
-│ › ${prefix}demote
+│ › ${prefix}kick [ @tag / reply ]
+│ › ${prefix}hidetag [ pesan]
+│ › ${prefix}tagall [ pesan ]
+│ › ${prefix}antilink [ on/off ]
+│ › ${prefix}mute [ on / off ]
+│ › ${prefix}promote [ @tag / 628××××××××× ]
+│ › ${prefix}demote [ @tag / 628××××××××× ]
 ╰────────────────⊱`
             let ments = [ownernya, me, ini_mark]
             let buttons = [{ buttonId: 'owner', buttonText: { displayText: '⌕ Owner' }, type: 1 },{ buttonId: 'ping', buttonText: { displayText: '⌕ Info Bot' }, type: 1 }]
