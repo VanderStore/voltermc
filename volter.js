@@ -1265,7 +1265,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                goblok = fs.readFileSync('./sound/rules.mp3')
 volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
 {
-rules = `Rules Bot*:
+rules = `*Rules Bot*:
 1. Dilarang telp/vc bot
 2. Harap beri jeda saat menggunakan bot (jangan spam)
 3. Dilarang mengeksploitasi bot
@@ -1287,7 +1287,7 @@ rules = `Rules Bot*:
  Syarat Ketentuan Bot 
  1. Bot akan keluar dari group apabila sudah waktunya keluar. 
  2. bot dapan mem-ban users secara sepihak terlepas dari users salah atau tidak. 
- 3. bot *tidak akan bertanggungjawab atas apapun yang users lakukan terhadap fitur bot.* 
+ 3. bot tidak akan bertanggungjawab atas apapun yang users lakukan terhadap fitur bot. 
  4. bot akan memberlakukan hukuman: block atau ban terhadap users yang melanggar peraturan. 
  5. bot bertanggung jawab atas kesalahan fatal dalam programing maupun owner.
 
