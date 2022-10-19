@@ -228,7 +228,6 @@ module.exports = volter = async (volter, m, chatUpdate, store) => {
         volter.ev.emit('messages.upsert', msg)
         }
 	    
-            break
 	    case 'sewabot': {
                 volter.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/e1125e91d75c52e653187.jpg' }, caption: `*List*\n*Sewa Botz*\n\n*➪ Perminggu : 1K*\n*➪ Perbulan : 2K*\n*➪ Permanen : 4K*\n\n_Note : permanen sampai admin pensi_` }, { quoted: m })
             }
