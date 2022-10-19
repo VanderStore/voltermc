@@ -49,19 +49,6 @@ var ucapanWaktu = 'Selamat Pagi 🌄'
 var ucapanWaktu = 'Selamat Pagi 🌉'
  } 
 
-// read database
-let tebaklagu = db.data.game.tebaklagu = []
-let _family100 = db.data.game.family100 = []
-let kuismath = db.data.game.math = []
-let tebakgambar = db.data.game.tebakgambar = []
-let tebakkata = db.data.game.tebakkata = []
-let caklontong = db.data.game.lontong = []
-let caklontong_desk = db.data.game.lontong_desk = []
-let tebakkalimat = db.data.game.kalimat = []
-let tebaklirik = db.data.game.lirik = []
-let tebaktebakan = db.data.game.tebakan = []
-let vote = db.data.others.vote = []
-
 module.exports = volter = async (volter, m, chatUpdate, store) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
@@ -241,364 +228,6 @@ module.exports = volter = async (volter, m, chatUpdate, store) => {
         volter.ev.emit('messages.upsert', msg)
         }
 	    
-	if (('family100'+m.chat in _family100) && isCmd) {
-            kuis = true
-            let room = _family100['family100'+m.chat]
-            let teks = budy.toLowerCase().replace(/[^\w\s\-]+/, '')
-            let isSurender = /^((me)?nyerah|surr?ender)$/i.test(m.text)
-            if (!isSurender) {
-                let index = room.jawaban.findIndex(v => v.toLowerCase().replace(/[^\w\s\-]+/, '') === teks)
-                if (room.terjawab[index]) return !0
-                room.terjawab[index] = m.sender
-            }
-            let isWin = room.terjawab.length === room.terjawab.filter(v => v).length
-            let caption = `
-Jawablah Pertanyaan Berikut :\n${room.soal}\n\n\nTerdapat ${room.jawaban.length} Jawaban ${room.jawaban.find(v => v.includes(' ')) ? `(beberapa Jawaban Terdapat Spasi)` : ''}
-${isWin ? `Semua Jawaban Terjawab` : isSurender ? 'Menyerah!' : ''}
-${Array.from(room.jawaban, (jawaban, index) => {
-        return isSurender || room.terjawab[index] ? `(${index + 1}) ${jawaban} ${room.terjawab[index] ? '@' + room.terjawab[index].split('@')[0] : ''}`.trim() : false
-    }).filter(v => v).join('\n')}
-    ${isSurender ? '' : `Perfect Player`}`.trim()
-            volter.sendText(m.chat, caption, m, { contextInfo: { mentionedJid: parseMention(caption) }}).then(mes => { return _family100['family100'+m.chat].pesan = mesg }).catch(_ => _)
-            if (isWin || isSurender) delete _family100['family100'+m.chat]
-        }
-
-        if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = tebaklagu[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete tebaklagu[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-
-        if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = kuismath[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await m.reply(`🎮 Kuis Matematika  🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? kirim ${prefix}math mode`)
-                delete kuismath[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-
-        if (tebakgambar.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = tebakgambar[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `🎮 Tebak Gambar 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete tebakgambar[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-
-        if (tebakkata.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = tebakkata[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `🎮 Tebak Kata 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete tebakkata[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-
-        if (caklontong.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = caklontong[m.sender.split('@')[0]]
-	    deskripsi = caklontong_desk[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `🎮 Cak Lontong 🎮\n\nJawaban Benar 🎉\n*${deskripsi}*\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete caklontong[m.sender.split('@')[0]]
-		delete caklontong_desk[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-
-        if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = tebakkalimat[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete tebakkalimat[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-
-        if (tebaklirik.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = tebaklirik[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `🎮 Tebak Lirik 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete tebaklirik[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-	    
-	if (tebaktebakan.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
-            kuis = true
-            jawaban = tebaktebakan[m.sender.split('@')[0]]
-            if (budy.toLowerCase() == jawaban) {
-                await volter.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, volter.user.name, m)
-                delete tebaktebakan[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
-        }
-        
-        //TicTacToe
-	    this.game = this.game ? this.game : {}
-	    let room = Object.values(this.game).find(room => room.id && room.game && room.state && room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender) && room.state == 'PLAYING')
-	    if (room) {
-	    let ok
-	    let isWin = !1
-	    let isTie = !1
-	    let isSurrender = !1
-	    // m.reply(`[DEBUG]\n${parseInt(m.text)}`)
-	    if (!/^([1-9]|(me)?nyerah|surr?ender|off|skip)$/i.test(m.text)) return
-	    isSurrender = !/^[1-9]$/.test(m.text)
-	    if (m.sender !== room.game.currentTurn) { // nek wayahku
-	    if (!isSurrender) return !0
-	    }
-	    if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
-	    m.reply({
-	    '-3': 'Game telah berakhir',
-	    '-2': 'Invalid',
-	    '-1': 'Posisi Invalid',
-	    0: 'Posisi Invalid',
-	    }[ok])
-	    return !0
-	    }
-	    if (m.sender === room.game.winner) isWin = true
-	    else if (room.game.board === 511) isTie = true
-	    let arr = room.game.render().map(v => {
-	    return {
-	    X: '❌',
-	    O: '⭕',
-	    1: '1️⃣',
-	    2: '2️⃣',
-	    3: '3️⃣',
-	    4: '4️⃣',
-	    5: '5️⃣',
-	    6: '6️⃣',
-	    7: '7️⃣',
-	    8: '8️⃣',
-	    9: '9️⃣',
-	    }[v]
-	    })
-	    if (isSurrender) {
-	    room.game._currentTurn = m.sender === room.game.playerX
-	    isWin = true
-	    }
-	    let winner = isSurrender ? room.game.currentTurn : room.game.winner
-	    let str = `Room ID: ${room.id}
-
-${arr.slice(0, 3).join('')}
-${arr.slice(3, 6).join('')}
-${arr.slice(6).join('')}
-
-${isWin ? `@${winner.split('@')[0]} Menang!` : isTie ? `Game berakhir` : `Giliran ${['❌', '⭕'][1 * room.game._currentTurn]} (@${room.game.currentTurn.split('@')[0]})`}
-❌: @${room.game.playerX.split('@')[0]}
-⭕: @${room.game.playerO.split('@')[0]}
-
-Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
-	    if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
-	    room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
-	    if (room.x !== room.o) await volter.sendText(room.x, str, m, { mentions: parseMention(str) } )
-	    await volter.sendText(room.o, str, m, { mentions: parseMention(str) } )
-	    if (isTie || isWin) {
-	    delete this.game[room.id]
-	    }
-	    }
-
-        //Suit PvP
-	    this.suit = this.suit ? this.suit : {}
-	    let roof = Object.values(this.suit).find(roof => roof.id && roof.status && [roof.p, roof.p2].includes(m.sender))
-	    if (roof) {
-	    let win = ''
-	    let tie = false
-	    if (m.sender == roof.p2 && /^(acc(ept)?|terima|gas|oke?|tolak|gamau|nanti|ga(k.)?bisa|y)/i.test(m.text) && m.isGroup && roof.status == 'wait') {
-	    if (/^(tolak|gamau|nanti|n|ga(k.)?bisa)/i.test(m.text)) {
-	    volter.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} menolak suit, suit dibatalkan`, m)
-	    delete this.suit[roof.id]
-	    return !0
-	    }
-	    roof.status = 'play'
-	    roof.asal = m.chat
-	    clearTimeout(roof.waktu)
-	    //delete roof[roof.id].waktu
-	    volter.sendText(m.chat, `Suit telah dikirimkan ke chat
-
-@${roof.p.split`@`[0]} dan 
-@${roof.p2.split`@`[0]}
-
-Silahkan pilih suit di chat masing"
-klik https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] })
-	    if (!roof.pilih) volter.sendText(roof.p, `Silahkan pilih \n\nBatu🗿\nKertas📄\nGunting✂️`, m)
-	    if (!roof.pilih2) volter.sendText(roof.p2, `Silahkan pilih \n\nBatu🗿\nKertas📄\nGunting✂️`, m)
-	    roof.waktu_milih = setTimeout(() => {
-	    if (!roof.pilih && !roof.pilih2) volter.sendText(m.chat, `Kedua pemain tidak niat main,\nSuit dibatalkan`)
-	    else if (!roof.pilih || !roof.pilih2) {
-	    win = !roof.pilih ? roof.p2 : roof.p
-	    volter.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} tidak memilih suit, game berakhir`, m)
-	    }
-	    delete this.suit[roof.id]
-	    return !0
-	    }, roof.timeout)
-	    }
-	    let jwb = m.sender == roof.p
-	    let jwb2 = m.sender == roof.p2
-	    let g = /gunting/i
-	    let b = /batu/i
-	    let k = /kertas/i
-	    let reg = /^(gunting|batu|kertas)/i
-	    if (jwb && reg.test(m.text) && !roof.pilih && !m.isGroup) {
-	    roof.pilih = reg.exec(m.text.toLowerCase())[0]
-	    roof.text = m.text
-	    m.reply(`Kamu telah memilih ${m.text} ${!roof.pilih2 ? `\n\nMenunggu lawan memilih` : ''}`)
-	    if (!roof.pilih2) volter.sendText(roof.p2, '_Lawan sudah memilih_\nSekarang giliran kamu', 0)
-	    }
-	    if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) {
-	    roof.pilih2 = reg.exec(m.text.toLowerCase())[0]
-	    roof.text2 = m.text
-	    m.reply(`Kamu telah memilih ${m.text} ${!roof.pilih ? `\n\nMenunggu lawan memilih` : ''}`)
-	    if (!roof.pilih) volter.sendText(roof.p, '_Lawan sudah memilih_\nSekarang giliran kamu', 0)
-	    }
-	    let stage = roof.pilih
-	    let stage2 = roof.pilih2
-	    if (roof.pilih && roof.pilih2) {
-	    clearTimeout(roof.waktu_milih)
-	    if (b.test(stage) && g.test(stage2)) win = roof.p
-	    else if (b.test(stage) && k.test(stage2)) win = roof.p2
-	    else if (g.test(stage) && k.test(stage2)) win = roof.p
-	    else if (g.test(stage) && b.test(stage2)) win = roof.p2
-	    else if (k.test(stage) && b.test(stage2)) win = roof.p
-	    else if (k.test(stage) && g.test(stage2)) win = roof.p2
-	    else if (stage == stage2) tie = true
-	    volter.sendText(roof.asal, `_*Hasil Suit*_${tie ? '\nSERI' : ''}
-
-@${roof.p.split`@`[0]} (${roof.text}) ${tie ? '' : roof.p == win ? ` Menang \n` : ` Kalah \n`}
-@${roof.p2.split`@`[0]} (${roof.text2}) ${tie ? '' : roof.p2 == win ? ` Menang \n` : ` Kalah \n`}
-`.trim(), m, { mentions: [roof.p, roof.p2] })
-	    delete this.suit[roof.id]
-	    }
-	    }
-	    
-	    let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
-	    for (let jid of mentionUser) {
-            let user = global.db.data.users[jid]
-            if (!user) continue
-            let afkTime = user.afkTime
-            if (!afkTime || afkTime < 0) continue
-            let reason = user.afkReason || ''
-            m.reply(`
-Jangan tag dia!
-Dia sedang AFK ${reason ? 'dengan alasan ' + reason : 'tanpa alasan'}
-Selama ${clockString(new Date - afkTime)}
-`.trim())
-        }
-
-        if (db.data.users[m.sender].afkTime > -1) {
-            let user = global.db.data.users[m.sender]
-            m.reply(`
-Kamu berhenti AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
-Selama ${clockString(new Date - user.afkTime)}
-`.trim())
-            user.afkTime = -1
-            user.afkReason = ''
-        }
-	    
-        switch(command) {
-	    case 'afk': {
-                let user = global.db.data.users[m.sender]
-                user.afkTime = + new Date
-                user.afkReason = text
-                m.reply(`${m.pushName} *Telah Afk*${text ? ': ' + text : ''}`)
-            }
-            break	
-        case 'ttc': case 'ttt': case 'tictactoe': {
-        	if (!m.isGroup) throw mess.group
-            let TicTacToe = require("./lib/tictactoe")
-            this.game = this.game ? this.game : {}
-            if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw 'Kamu masih didalam game'
-            let room = Object.values(this.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
-            if (room) {
-            m.reply('Partner ditemukan!')
-            room.o = m.chat
-            room.game.playerO = m.sender
-            room.state = 'PLAYING'
-            let arr = room.game.render().map(v => {
-            return {
-            X: '❌',
-            O: '⭕',
-            1: '1️⃣',
-            2: '2️⃣',
-            3: '3️⃣',
-            4: '4️⃣',
-            5: '5️⃣',
-            6: '6️⃣',
-            7: '7️⃣',
-            8: '8️⃣',
-            9: '9️⃣',
-            }[v]
-            })
-            let str = `Room ID: ${room.id}
-
-${arr.slice(0, 3).join('')}
-${arr.slice(3, 6).join('')}
-${arr.slice(6).join('')}
-
-Menunggu @${room.game.currentTurn.split('@')[0]}
-
-Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
-            if (room.x !== room.o) await volter.sendText(room.x, str, m, { mentions: parseMention(str) } )
-            await volter.sendText(room.o, str, m, { mentions: parseMention(str) } )
-            } else {
-            room = {
-            id: 'tictactoe-' + (+new Date),
-            x: m.chat,
-            o: '',
-            game: new TicTacToe(m.sender, 'o'),
-            state: 'WAITING'
-            }
-            if (text) room.name = text
-            m.reply('Menunggu partner' + (text ? ` mengetik command dibawah ini ${prefix}${command} ${text}` : ''))
-            this.game[room.id] = room
-            }
-            }
-            break
-            case 'delttc': case 'delttt': {
-            this.game = this.game ? this.game : {}
-            try {
-            if (this.game) {
-            delete this.game
-            volter.sendText(m.chat, `Berhasil delete session TicTacToe`, m)
-            } else if (!this.game) {
-            m.reply(`Session TicTacToe🎮 tidak ada`)
-            } else throw '?'
-            } catch (e) {
-            m.reply('rusak')
-            }
-            }
-            break
-            case 'suitpvp': case 'suit': {
-            this.suit = this.suit ? this.suit : {}
-            let poin = 10
-            let poin_lose = 10
-            let timeout = 60000
-            if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.sender))) m.reply(`Selesaikan suit mu yang sebelumnya`)
-	    if (m.mentionedJid[0] === m.sender) return m.reply(`Tidak bisa bermain dengan diri sendiri !`)
-            if (!m.mentionedJid[0]) return m.reply(`_Siapa yang ingin kamu tantang?_\nTag orangnya..\n\nContoh : ${prefix}suit @${owner[1]}`, m.chat, { mentions: [owner[1] + '@s.whatsapp.net'] })
-            if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.mentionedJid[0]))) throw `Orang yang kamu tantang sedang bermain suit bersama orang lain :(`
-            let id = 'suit_' + new Date() * 1
-            let caption = `_*SUIT PvP*_
-
-@${m.sender.split`@`[0]} *menantang* @${m.mentionedJid[0].split`@`[0]} *untuk bermain suit*
-
-*Silahkan* @${m.mentionedJid[0].split`@`[0]} *untuk ketik terima/tolak*`
-            this.suit[id] = {
-            chat: await volter.sendText(m.chat, caption, m, { mentions: parseMention(caption) }),
-            id: id,
-            p: m.sender,
-            p2: m.mentionedJid[0],
-            status: 'wait',
-            waktu: setTimeout(() => {
-            if (this.suit[id]) volter.sendText(m.chat, `_Waktu suit habis_`, m)
-            delete this.suit[id]
-            }, 60000), poin, poin_lose, timeout
-            }
-            }
             break
 	    case 'sewabot': {
                 volter.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/e1125e91d75c52e653187.jpg' }, caption: `*List*\n*Sewa Botz*\n\n*➪ Perminggu : 1K*\n*➪ Perbulan : 2K*\n*➪ Permanen : 4K*\n\n_Note : permanen sampai admin pensi_` }, { quoted: m })
@@ -1111,75 +740,15 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(respon)
             }
             break
-            case 'speedtest': {
-            m.reply('Testing Speed...')
-            let cp = require('child_process')
-            let { promisify } = require('util')
-            let exec = promisify(cp.exec).bind(cp)
-          let o
-          try {
-          o = await exec('python speed.py')
-          } catch (e) {
-          o = e
-         } finally {
-        let { stdout, stderr } = o
-        if (stdout.trim()) m.reply(stdout)
-        if (stderr.trim()) m.reply(stderr)
-            }
-            }
-            break
             case 'owner': case 'creator': {
                 volter.sendContact(m.chat, global.owner, m)
-            }
-            break
-            case 'setmenu': {
-            if (!isCreator) throw mess.owner
-            let setbot = db.data.settings[botNumber]
-               if (args[0] === 'templateImage'){
-                setbot.templateImage = true
-                setbot.templateVideo = false
-                setbot.templateGif = false
-                setbot.templateMsg = false
-                m.reply(mess.success)
-                } else if (args[0] === 'templateVideo'){
-                setbot.templateImage = false
-                setbot.templateVideo = true
-                setbot.templateGif = false
-                setbot.templateMsg = false
-                m.reply(mess.success)
-                } else if (args[0] === 'templateGif'){
-                setbot.templateImage = false
-                setbot.templateVideo = false
-                setbot.templateGif = true
-                setbot.templateMsg = false
-                m.reply(mess.success)
-                } else if (args[0] === 'templateMessage'){
-                setbot.templateImage = false
-                setbot.templateVideo = false
-                setbot.templateGif = false
-                setbot.templateMsg = true
-                m.reply(mess.success)
-                } else {
-                let sections = [
-                {
-                title: "CHANGE MENU BOT",
-                rows: [
-                {title: "Template Image", rowId: `setmenu templateImage`, description: `Change menu bot to Template Image`},
-                {title: "Template Video", rowId: `setmenu templateVideo`, description: `Change menu bot to Template Video`},
-                {title: "Template Gif", rowId: `setmenu templateGif`, description: `Change menu bot to Template Gif`},
-                {title: "Template Message", rowId: `setmenu templateMessage`, description: `Change menu bot to Template Message`}
-                ]
-                },
-                ]
-                volter.sendListMsg(m.chat, `pilih aja *${pushname}* Setmenu nya!`, nyoutube, `*Hello Kak* !`, `Pilih Set Menu`, sections, m)
-                }
             }
             break
             
 //PEMBATAS=================VOLTER======================
             case 'sticker': case 's': case 'stickergif': case 'sgif': {
-            if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
             if (!quoted) throw `*Balas Video/Image Dengan Caption* ${prefix + command}`
             m.reply(mess.wait)
                     if (/image/.test(mime)) {
@@ -1197,8 +766,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
          case 'emojimix': {
-         if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+         if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 		let [emoji1, emoji2] = text.split`+`
 		if (!emoji1) throw `Example : ${prefix + command} 😅+🤔`
 		if (!emoji2) throw `Example : ${prefix + command} 😅+🤔`
@@ -1210,8 +779,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 	    }
 	    break
 	    case 'emojimix2': {
-	    if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+	    if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 	    if (!text) throw `Example : ${prefix + command} 😅`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(text)}`)
 		for (let res of anu.results) {
@@ -1221,8 +790,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 	    }
          break
          case 'tts': {
-         if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+         if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
          	if (!text) throw `Example : ${prefix + command} text`
              let tts = await fetchJson(`https://api.akuari.my.id/texttovoice/texttosound_id?query=${text}`)
              volter.sendMessage(m.chat, { audio: { url: tts.result }, mimetype: 'audio/mpeg', fileName: `${text}.mp3` }, { quoted: fvn })
@@ -1250,8 +819,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'toimage': case 'toimg': {
-            if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `Balas sticker dengan caption *${prefix + command}*`
                 m.reply(mess.wait)
@@ -1266,9 +835,9 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 })
             }
             break
-	        case 'tomp4': case 'tovideo': {
-	        if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+	        case 'tovideo': {
+	        if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
                 m.reply(mess.wait)
@@ -1279,20 +848,9 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 await fs.unlinkSync(media)
             }
             break
-            case 'tomp3': {
-            if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-            if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-            if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
-            let media = await quoted.download()
-            let { toAudio } = require('./lib/converter')
-            let audio = await toAudio(media, 'mp4')
-            volter.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert By ${volter.user.name}.mp3`}, { quoted : m })
-            }
-            break
 	        case 'tourl': {
-	        if (!isPremium && global.db.data.users[m.sender].limit < 5) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 5 // -5 limit
+	        if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
                 m.reply(mess.wait)
 		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
                 let media = await volter.downloadAndSaveMediaMessage(quoted)
@@ -1337,11 +895,33 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                goblok = fs.readFileSync('./sound/rules.mp3')
 volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
 {
-rules = `┌──⭓ *Rules BOT*
-│
-│ *No Spam & Telp❗*
-│
-└───────𖦹Ꜥꜥ`
+rules = `Rules Bot*:
+1. Dilarang telp/vc bot
+2. Harap beri jeda saat menggunakan bot (jangan spam)
+3. Dilarang mengeksploitasi bot
+4. Dilarang menjual belikan bot, sebab bot ini free untuk digunakan (kecuali memasukkan ke dalam group)
+5. Bot tidak menyimpan data user
+6. Kami tidak bertanggung jawab atas apa yg user lakukan kepada bot ataupun sebaliknya
+7. Hindari konten pornografi (berupa gambar, dokumen, video, dan stiker)
+8. Bot yang sudah dikick dari group berarti masa sewa habis
+
+*Kebijakan Privasi:*
+ 1. bot tidak akan merekam data riwayat chat user. 
+ 2. bot tidak akan menyebarkan nomor users. 
+ 3. bot tidak akan menyimpan media yang dikirimkan oleh users. 
+ 4. bot tidak akan menyalah gunakan data data users. 
+ 5. Owner bot berhak melihat data riwayat chat users. 
+ 6. Owner bot berhak melihat status users. 
+ 7. Owner bot dapat melihat riwayat chat, dan media yang dikirimkan users.
+ 
+ Syarat Ketentuan Bot 
+ 1. Bot akan keluar dari group apabila sudah waktunya keluar. 
+ 2. bot dapan mem-ban users secara sepihak terlepas dari users salah atau tidak. 
+ 3. bot *tidak akan bertanggungjawab atas apapun yang users lakukan terhadap fitur bot.* 
+ 4. bot akan memberlakukan hukuman: block atau ban terhadap users yang melanggar peraturan. 
+ 5. bot bertanggung jawab atas kesalahan fatal dalam programing maupun owner.
+
+Tahulah berterimakasih sebab anda tidak perlu membayar untuk menggunakan bot ini, gunakan secara bijak, jangan berlebihan.`
 let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' }, type: 1 },{ buttonId: 'sewabot', buttonText: { displayText: '👑Sewa' }, type: 1 }]
             await volter.sendButtonText(m.chat, buttons, rules, nyoutube, m, {quoted: fkontak})
             }
@@ -1369,35 +949,34 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
  ${runtime(process.uptime())}
  
 ╭──❲ *OTHERS MENU* ❳
-│ › ${prefix}rules
-│ › ${prefix}sewabot
+│◦〉 ${prefix}rules
+│◦〉 ${prefix}sewabot
 ╰────────────────⊱
 
 ╭──❲ *CONVERT MENU* ❳
-│ › ${prefix}toimage
-│ › ${prefix}sticker
-│ › ${prefix}removebg
-│ › ${prefix}tourl
-│ › ${prefix}togif
-│ › ${prefix}tovideo
-│ › ${prefix}smeme
+│◦〉 ${prefix}toimage
+│◦〉 ${prefix}sticker
+│◦〉 ${prefix}removebg
+│◦〉 ${prefix}tourl
+│◦〉 ${prefix}tovideo
+│◦〉 ${prefix}smeme
 ╰────────────────⊱
  
-╭──❲ *CONVERT MENU* ❳
-│ › ${prefix}linkgroup
-│ › ${prefix}ephemeral 
-│ › ${prefix}setppgc [ reply image }
-│ › ${prefix}setname [ text ]
-│ › ${prefix}setdesc [ text ]
-│ › ${prefix}group [ open / close ]
-│ › ${prefix}editinfo 
-│ › ${prefix}kick [ @tag / reply ]
-│ › ${prefix}hidetag [ pesan]
-│ › ${prefix}tagall [ pesan ]
-│ › ${prefix}antilink [ on/off ]
-│ › ${prefix}mute [ on / off ]
-│ › ${prefix}promote [ @tag / 628××××××××× ]
-│ › ${prefix}demote [ @tag / 628××××××××× ]
+╭──❲ *GROUP MENU* ❳
+│◦〉 ${prefix}linkgroup
+│◦〉 ${prefix}ephemeral 
+│◦〉 ${prefix}setppgc
+│◦〉 ${prefix}setname
+│◦〉 ${prefix}setdesc 
+│◦〉 ${prefix}group 
+│◦〉 ${prefix}editinfo 
+│◦〉 ${prefix}kick 
+│◦〉 ${prefix}hidetag 
+│◦〉 ${prefix}tagall
+│◦〉 ${prefix}antilink 
+│◦〉 ${prefix}mute 
+│◦〉 ${prefix}promote 
+│◦〉 ${prefix}demote
 ╰────────────────⊱`
             let ments = [ownernya, me, ini_mark]
             let buttons = [{ buttonId: 'owner', buttonText: { displayText: '⌕ Owner' }, type: 1 },{ buttonId: 'ping', buttonText: { displayText: '⌕ Info Bot' }, type: 1 }]
