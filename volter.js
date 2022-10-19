@@ -174,9 +174,6 @@ module.exports = volter = async (volter, m, chatUpdate, store) => {
         if (!volter.public) {
             if (!m.key.fromMe) return
         }
-        if (m.message) {
-            volter.readMessages([m.key])
-        }
 
 	// reset limit every 12 hours
         let cron = require('node-cron')
