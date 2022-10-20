@@ -174,6 +174,10 @@ module.exports = volter = async (volter, m, chatUpdate, store) => {
         if (!volter.public) {
             if (!m.key.fromMe) return
         }
+        if (m.message) {
+            volter.readMessages([m.key])
+            console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> Dari'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Pribadi Chat', m.chat))
+        }
 
 	// reset limit every 12 hours
         let cron = require('node-cron')
