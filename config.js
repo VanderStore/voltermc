@@ -27,8 +27,8 @@ global.sp = ''
 global.mess = {
     success: '*_Done Kack_*',
     admin: '*_Fitur Khusus Admin Group!_*',
-    botAdmin: '*_Bot Harus Menjadi Admin Terlebih Dahulu Kack !!_*',
-    premime: '*_Fitur Khusus Premium Kalo Mau Daftar Ketik Sewa_*',
+    botAdmin: '*_Bot Harus Menjadi Admin Terlebih Dahulu MassZe !!_*',
+    premime: '*_Fitur Khusus Premium Kalo Mau Daftar Ketik #sewabot_*',
     owner: '*_Fitur Khusus Owner Bot_*',
     group: '*_Fitur Digunakan Hanya Untuk Group!_*',
     private: '*_Fitur Digunakan Hanya Untuk Private Chat!_*',
@@ -38,7 +38,7 @@ global.mess = {
 }
 global.limitawal = {
     premium: "Infinity",
-    free: 5
+    free: 1
 }
 global.thumb = fs.readFileSync('./image/volter.jpg')
 global.vaze = { url: 'https://telegra.ph/file/15209657f9d4f59c7ca1e.mp4' }
