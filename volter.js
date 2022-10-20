@@ -1234,57 +1234,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             
 //PEMBATAS=================VOLTER======================
-            case 'yts': case 'ytsearch': {
-                if (!text) throw `Example : ${prefix + command} story wa anime`
-                let yts = require("yt-search")
-                let search = await yts(text)
-                let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
-                let no = 1
-                for (let i of search.all) {
-                    teks += `⭔ No : ${no++}\n⭔ Type : ${i.type}\n⭔ Video ID : ${i.videoId}\n⭔ Title : ${i.title}\n⭔ Views : ${i.views}\n⭔ Duration : ${i.timestamp}\n⭔ Upload At : ${i.ago}\n⭔ Author : ${i.author.name}\n⭔ Url : ${i.url}\n\n─────────────────\n\n`
-                }
-                volter.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
-            }
-            break
-            case 'play': {
-                if (!text) throw `Example : ${prefix + command} story wa anime`
-                let yts = require("yt-search")
-                let search = await yts(text)
-                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-                let buttons = [
-                    {buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-                ]
-                let buttonMessage = {
-                    image: { url: anu.thumbnail },
-                    caption: `
-⭔ Title : ${anu.title}
-⭔ Ext : Search
-⭔ ID : ${anu.videoId}
-⭔ Duration : ${anu.timestamp}
-⭔ Viewers : ${anu.views}
-⭔ Upload At : ${anu.ago}
-⭔ Author : ${anu.author.name}
-⭔ Channel : ${anu.author.url}
-⭔ Description : ${anu.description}
-⭔ Url : ${anu.url}`,
-                    footer: volter.user.name,
-                    buttons: buttons,
-                    headerType: 4
-                }
-                volter.sendMessage(m.chat, buttonMessage, { quoted: m })
-            }
-            case 'ytmp3': case 'ytaudio': {
-                let { yta } = require('./lib/y2mate')
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
-                let quality = args[1] ? args[1] : '128kbps'
-                let media = await yta(text, quality)
-                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                volter.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)
-                volter.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
-            }
-            break
-            
-//PEMBATAS=================VOLTER======================            
             case 'menfes': case 'menfess': {
 		        if (m.isGroup) throw ('fitur tidak dapat digunakan di grup')
             	if (!text) throw `Example : ${prefix + command} 6282xxxxx|nama samaran|pesan`
@@ -1496,6 +1445,15 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
             }
             break
             case 'menu': {
+                reactionMessage = {
+                    react: {
+                        text: '❤',
+                        key: { remoteJid: m.chat, fromMe: true, id: quoted.id }
+                    }
+                }
+                volter.sendMessage(m.chat, reactionMessage)
+            }
+{
             let ownernya = ownernomer + '@s.whatsapp.net'
             let me = m.sender
             let jawab = `_Hi ${pushname} ${ucapanWaktu}_
@@ -1503,13 +1461,13 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
 ╭──❲ *BOT INFO* ❳
 │ • *Name : Volter Botz*
 │ • *Owner : @${ownernya.split('@')[0]}*
-╰────────────────⊱
+╰───────────────⊱
 ╭──❲ *YOUR INFO* ❳
 │ • *Name : ${pushname}*
 │ • *Api : @${me.split('@')[0]}*
 │ • *Premium* : ${isPremium ? '✅' : `❌`}
 │ • *Limit* : ${isPremium ? '♾Infinity' : `〽️${db.data.users[m.sender].limit}`}
-╰────────────────⊱
+╰───────────────⊱
 
 *⛦ RUNTIME SERVER ⛦*
  ${runtime(process.uptime())}
@@ -1518,27 +1476,27 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
  
  ╭──❲ *NEW MENU* ❳
 │◦〉 ${prefix}menfess
-╰────────────────⊱
+╰───────────────⊱
 
 ╭──❲ *OTHERS MENU* ❳
 │◦〉 ${prefix}rules
 │◦〉 ${prefix}sewabot
-╰────────────────⊱
+╰───────────────⊱
 
 ╭──❲ *DOWNLOADER MENU* ❳
 │◦〉 ${prefix}tiktoknowm
 │◦〉 ${prefix}tiktokmp3
-│◦〉 ${prefix}play
-╰────────────────⊱
+╰───────────────⊱
 
 ╭──❲ *CONVERT MENU* ❳
+│◦〉 ${prefix}attp
 │◦〉 ${prefix}toimage
 │◦〉 ${prefix}sticker
 │◦〉 ${prefix}removebg
 │◦〉 ${prefix}tourl
 │◦〉 ${prefix}tovideo
 │◦〉 ${prefix}smeme
-╰────────────────⊱
+╰───────────────⊱
  
 ╭──❲ *GROUP MENU* ❳
 │◦〉 ${prefix}linkgroup
@@ -1555,7 +1513,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
 │◦〉 ${prefix}mute 
 │◦〉 ${prefix}promote 
 │◦〉 ${prefix}demote
-╰────────────────⊱
+╰───────────────⊱
 
 ╭──❲ *GAME MENU* ❳
 │◦〉 ${prefix}jodohku
@@ -1568,7 +1526,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
 │◦〉 ${prefix}tictactoe
 │◦〉 ${prefix}afk
 │◦〉 ${prefix}suitpvp
-╰────────────────⊱`
+╰───────────────⊱`
             let ments = [ownernya, me, ini_mark]
             let buttons = [{ buttonId: 'owner', buttonText: { displayText: '⌕ Owner' }, type: 1 },{ buttonId: 'ping', buttonText: { displayText: '⌕ Info Bot' }, type: 1 }]
             await volter.sendButtonText(m.chat, buttons, jawab, nyoutube, m, {mentions: ments, quoted: fkontak})
