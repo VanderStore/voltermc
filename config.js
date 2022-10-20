@@ -37,7 +37,7 @@ global.mess = {
     endLimit: '*_Limit Harian Anda Telah Habis, Limit Akan Direset Setiap Jam 12_*',
 }
 global.limitawal = {
-    premium: "Infinity",
+    premium: "Unlimited",
     free: 1
 }
 global.thumb = fs.readFileSync('./image/volter.jpg')
