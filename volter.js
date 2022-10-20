@@ -656,7 +656,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             }
             break  
             case 'join': {
-                if (!isCreator) throw mess.owner
+                if (!isPremium) throw mess.premime
                 if (!text) throw 'Masukkan Link Group!'
                 if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
                 m.reply(mess.wait)
