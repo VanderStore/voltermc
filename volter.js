@@ -1466,7 +1466,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
 │ • *Name : ${pushname}*
 │ • *Api : @${me.split('@')[0]}*
 │ • *Premium* : ${isPremium ? '✅' : `❌`}
-│ • *Limit* : ${isPremium ? '♾Infinity' : `〽️${db.data.users[m.sender].limit}`}
+│ • *Limit* : ${isPremium ? '♾Unlimited' : `〽️${db.data.users[m.sender].limit}`}
 ╰───────────────⊱
 
 *⛦ RUNTIME SERVER ⛦*
@@ -1474,7 +1474,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
  
  _Note : bot whatsapp iyalah bot hasil coding untuk berjalan sebagai kebutuhan di WhatsApp , bot whatsap mempunyai sistem unik , bisa membuat apa pun sesuai list commands_
  
- ╭──❲ *NEW MENU* ❳
+╭──❲ *NEW MENU* ❳
 │◦〉 ${prefix}menfess
 ╰───────────────⊱
 
