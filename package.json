@@ -2,10 +2,10 @@
   "name": "volterjb12",
   "version": "1.2.3",
   "description": "New Update Volter MD",
-  "main": "index.js",
+  "main": "main.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node index.js"
+    "start": "node main.js"
   },
   "keywords": [
     "termux",
@@ -18,7 +18,7 @@
     "bot-md",
     "multi-device"
   ],
-  "author": "Zens Cuyy.",
+  "author": "Volter Dev.",
   "license": "MIT",
   "dependencies": {
     "@adiwajshing/baileys": "^4.1.0",

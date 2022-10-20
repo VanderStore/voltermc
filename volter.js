@@ -496,14 +496,14 @@ Selama ${clockString(new Date - user.afkTime)}
         }
 	    
         switch(command) {
-	    case 'Gosah Di Ubah Eror': {
+	    case 'Afk': {
                 let user = global.db.data.users[m.sender]
                 user.afkTime = + new Date
                 user.afkReason = text
                 m.reply(`${m.pushName} *Telah Afk*${text ? ': ' + text : ''}`)
             }
             break	
-        case 'Gosah Di Ubah Erorr': {
+        case 'tictactoe': {
         	if (!m.isGroup) throw mess.group
             let TicTacToe = require("./lib/tictactoe")
             this.game = this.game ? this.game : {}
@@ -1113,7 +1113,182 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             
 //PEMBATAS=================VOLTER======================
-            case 'sticker': case 's': case 'stickergif': case 'sgif': {
+            case 'slot': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            const somtoy = sotoy[Math.floor(Math.random() * sotoy.length)]
+            let sloth =`[  🎰VIRTUAL SLOT 🎰  ]\n------------------------\n\n🍒 : 🍌 : 🍇\n${somtoy}<=====\n🍇 : 🍌 : 🍒\n\n------------------------\n[  🎰 VIRTUAL SLOT 🎰  ]\n\n*Keterangan* :\n_Jika Mendapatkan 3Buah Sama_\n_Berarti Kamu Win_\n\n_Contoh : 🍒 : 🍒 : 🍒_ <=====`
+            let buttons = [{ buttonId: 'slot', buttonText: { displayText: '🎰MAIN LAGI🎰' }, type: 1 }]
+            await volter.sendButtonText(m.chat, buttons, sloth, nyoutube, m)
+            }
+            break
+            case 'jodohku': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            if (!m.isGroup) throw mess.group
+            let member = participants.map(u => u.id)
+            let me = m.sender
+            let jodoh = member[Math.floor(Math.random() * member.length)]
+            let jawab = `👫Jodoh mu adalah
+
+@${me.split('@')[0]} ❤️ @${jodoh.split('@')[0]}`
+            let ments = [me, jodoh]
+            let buttons = [
+                        { buttonId: 'jodohku', buttonText: { displayText: 'Jodohku' }, type: 1 }
+                    ]
+                    await volter.sendButtonText(m.chat, buttons, jawab, volter.user.name, m, {mentions: ments})
+            }
+            break
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            case 'jadian': {
+            if (!m.isGroup) throw mess.group
+            let member = participants.map(u => u.id)
+            let orang = member[Math.floor(Math.random() * member.length)]
+            let jodoh = member[Math.floor(Math.random() * member.length)]
+            let jawab = `Ciee yang Jadian💖 Jangan lupa Donasi🗿
+
+@${orang.split('@')[0]} ❤️ @${jodoh.split('@')[0]}`
+            let menst = [orang, jodoh]
+            let buttons = [
+                        { buttonId: 'jadian', buttonText: { displayText: 'Jadian' }, type: 1 }
+                    ]
+                    await volter.sendButtonText(m.chat, buttons, jawab, nyoutube, m, {mentions: menst})
+            }
+            break
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            case 'gbtku': {
+            if (!isPremium) throw mess.premime
+			if (!text) throw `Example : ${prefix + command} hai|halo`
+            let jawab = `${text.split("|")[0]}`
+            let buttons = [{ buttonId: 'menu', buttonText: { displayText: `` }, type: 1 }]
+            await volter.sendButtonText(m.chat, buttons, jawab, `${text.split("|")[1]}`, m)
+            }
+            break
+            case 'bisakah': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            	if (!text) throw `Example : ${prefix + command} saya menang?`
+            	let bisa = ['Bisa','Coba Saja','Pasti Bisa','Mungkin Saja','Tidak Bisa','Tidak Mungkin','Coba Ulangi','Ngimpi kah?','yakin bisa?']
+                let keh = bisa[Math.floor(Math.random() * bisa.length)]
+                let jawab = `*Bisakah ${text}*\nJawab : ${keh}`
+                let buttons = [{ buttonId: 'hehehe', buttonText: { displayText: 'SABAR🗿' }, type: 1 }]
+            await volter.sendButtonText(m.chat, buttons, jawab, nyoutube, m)
+            }
+            break
+            case 'apakah': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            	if (!text) throw `Example : ${prefix + command} saya bisa menang?`
+            	let apa = ['Iya','Tidak','Bisa Jadi','Coba Ulangi','Mungkin Saja','Coba Tanyakan Ayam']
+                let kah = apa[Math.floor(Math.random() * apa.length)]
+                let jawab = `*Apakah ${text}*\nJawab : ${kah}`
+                let buttons = [{ buttonId: 'hehehe', buttonText: { displayText: 'HAHAHA' }, type: 1 }]
+            await volter.sendButtonText(m.chat, buttons, jawab, nyoutube, m)
+            }
+            break
+            case 'kapan': case 'kapankah': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+            	if (!text) throw `Example : ${prefix + command} saya menang?`
+            	let kapan = ['Besok','Lusa','Nanti','4 Hari Lagi','5 Hari Lagi','6 Hari Lagi','1 Minggu Lagi','2 Minggu Lagi','3 Minggu Lagi','1 Bulan Lagi','2 Bulan Lagi','3 Bulan Lagi','4 Bulan Lagi','5 Bulan Lagi','6 Bulan Lagi','1 Tahun Lagi','2 Tahun Lagi','3 Tahun Lagi','4 Tahun Lagi','5 Tahun Lagi','6 Tahun Lagi','1 Abad lagi','3 Hari Lagi','Bulan Depan','Nanti','Tidak Akan Pernah']
+                let koh = kapan[Math.floor(Math.random() * kapan.length)]
+                let jawab = `*${command} ${text}*\nJawab : ${koh}`
+                let buttons = [{ buttonId: 'hehehe', buttonText: { displayText: 'SABAR🗿' }, type: 1 }]
+            await volter.sendButtonText(m.chat, buttons, jawab, nyoutube, m)
+            }
+            break
+            
+//PEMBATAS=================VOLTER======================
+            case 'tiktok': case 'tiktoknowm': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+                if (!text) throw 'Masukkan Query Link!'
+                m.reply(mess.wait)
+                let anu = await fetchJson(`https://anabotofc.herokuapp.com/api/download/tiktok2?url=${text}&apikey=AnaBot`)
+                let buttons = [
+                    {buttonId: `menu`, buttonText: {displayText: '📖List Menu'}, type: 1},
+                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
+                ]
+                let buttonMessage = {
+                    video: { url: anu.result.nowm },
+                    caption: `Download From ${text}`,
+                    footer: nyoutube,
+                    buttons: buttons,
+                    headerType: 5
+                }
+                volter.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+            case 'tiktokmp3': case 'tiktokaudio': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+                if (!text) throw 'Masukkan Query Link!'
+                m.reply(mess.wait)
+                let anu = await fetchJson(`https://anabotofc.herokuapp.com/api/download/tiktok2?url=${text}&apikey=AnaBot`)
+                let buttons = [
+                    {buttonId: `menu`, buttonText: {displayText: '📖List Menu'}, type: 1},
+                    {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: '► No Watermark'}, type: 1}
+                ]
+                let buttonMessage = {
+                    text: `Download From ${text}`,
+                    footer: nyoutube,
+                    buttons: buttons,
+                    headerType: 2
+                }
+                let msg = await volter.sendMessage(m.chat, buttonMessage, { quoted: m })
+                volter.sendMessage(m.chat, { audio: { url: anu.result.nowm }, mimetype: 'audio/mpeg'}, { quoted: msg })
+            }
+            break
+            
+//PEMBATAS=================VOLTER======================
+            case 'play': case 'ytplay': {
+            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let buttons = [
+                    {buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+                    {buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: anu.thumbnail },
+                    caption: `
+⭔ Title : ${anu.title}
+⭔ Ext : Search
+⭔ ID : ${anu.videoId}
+⭔ Duration : ${anu.timestamp}
+⭔ Viewers : ${anu.views}
+⭔ Upload At : ${anu.ago}
+⭔ Author : ${anu.author.name}
+⭔ Channel : ${anu.author.url}
+⭔ Description : ${anu.description}
+⭔ Url : ${anu.url}`,
+                    footer: volter.user.name,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                volter.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+            
+//PEMBATAS=================VOLTER======================            
+            case 'menfes': case 'menfess': {
+		        if (m.isGroup) throw ('fitur tidak dapat digunakan di grup')
+            	if (!text) throw `Example : ${prefix + command} 6282xxxxx|nama samaran|pesan`
+            var mon = args.join(' ')
+            var m1 = mon.split("|")[0]
+            var m2 = mon.split("|")[1]
+            var m3 = mon.split("|")[2]
+               let kafloc = {key : {participant : '0@s.whatsapp.net', ...(m.chat ? { remoteJid: `status@broadcast` } : {}) },message: {locationMessage: {name: `${author}`,jpegThumbnail: thumb}}}
+               let mq1 = m1 + '@s.whatsapp.net'
+               let kawk = ('PESAN RAHASIA')
+               let ownernya = ownernomer + '@s.whatsapp.net'
+               let me = m.sender
+               let ments = [mq1, ownernya, me]
+               let pjtxt = `Pesan Dari : ${m2} \nUntuk : @${mq1.split('@')[0]}\n\n${m3}`
+               let buttons = [{ buttonId: 'hehehe', buttonText: { displayText: '❤LIKE' }, type: 1 }]
+            await volter.sendButtonText(m1 + '@s.whatsapp.net', buttons, pjtxt, kawk, m, {mentions: ments, quoted: kafloc})
+            let akhji = `Pesan Telah Terkirim\nKe @${mq1.split('@')[0]}`
+            await volter.sendButtonText(m.chat, buttons, akhji, nyoutube, m, {mentions: ments})
+            }
+            break
+            
+//PEMBATAS=================VOLTER======================            
+            case 'sticker': case 's': {
             if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
 		db.data.users[m.sender].limit -= 1 // -1 limit
             if (!quoted) throw `*Balas Video/Image Dengan Caption* ${prefix + command}`
@@ -1282,11 +1457,11 @@ rules = `*Rules Bot*:
  7. Owner bot dapat melihat riwayat chat, dan media yang dikirimkan users.
  
  Syarat Ketentuan Bot 
- 1. Bot akan keluar dari group apabila sudah waktunya keluar. 
- 2. bot dapan mem-ban users secara sepihak terlepas dari users salah atau tidak. 
- 3. bot tidak akan bertanggungjawab atas apapun yang users lakukan terhadap fitur bot. 
- 4. bot akan memberlakukan hukuman: block atau ban terhadap users yang melanggar peraturan. 
- 5. bot bertanggung jawab atas kesalahan fatal dalam programing maupun owner.
+ 1. Bot akan keluar dari group apabila sudah waktunya keluar
+ 2. bot dapan mem-ban users secara sepihak terlepas dari users salah atau tidak
+ 3. bot tidak akan bertanggungjawab atas apapun yang users lakukan terhadap fitur bot 
+ 4. bot akan memberlakukan hukuman: block atau ban terhadap users yang melanggar peraturan 
+ 5. bot bertanggung jawab atas kesalahan fatal dalam programing maupun owner
 
 Tahulah berterimakasih sebab anda tidak perlu membayar untuk menggunakan bot ini, gunakan secara bijak, jangan berlebihan.`
 let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' }, type: 1 },{ buttonId: 'sewabot', buttonText: { displayText: '👑Sewa' }, type: 1 }]
@@ -1294,9 +1469,6 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
             }
             break
             case 'menu': {
-               goblok = fs.readFileSync('./sound/menu.mp3')
-volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
-{
             let ownernya = ownernomer + '@s.whatsapp.net'
             let me = m.sender
             let jawab = `_Hi ${pushname} ${ucapanWaktu}_
@@ -1317,9 +1489,19 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
  
  _Note : bot whatsapp iyalah bot hasil coding untuk berjalan sebagai kebutuhan di WhatsApp , bot whatsap mempunyai sistem unik , bisa membuat apa pun sesuai list commands_
  
+ ╭──❲ *NEW MENU* ❳
+│◦〉 ${prefix}menfess
+╰────────────────⊱
+
 ╭──❲ *OTHERS MENU* ❳
 │◦〉 ${prefix}rules
 │◦〉 ${prefix}sewabot
+╰────────────────⊱
+
+╭──❲ *DOWNLOADER MENU* ❳
+│◦〉 ${prefix}tiktoknowm
+│◦〉 ${prefix}tiktokmp3
+│◦〉 ${prefix}play
 ╰────────────────⊱
 
 ╭──❲ *CONVERT MENU* ❳
@@ -1346,6 +1528,19 @@ volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {q
 │◦〉 ${prefix}mute 
 │◦〉 ${prefix}promote 
 │◦〉 ${prefix}demote
+╰────────────────⊱
+
+╭──❲ *GAME MENU* ❳
+│◦〉 ${prefix}jodohku
+│◦〉 ${prefix}apakah
+│◦〉 ${prefix}slot
+│◦〉 ${prefix}jadian
+│◦〉 ${prefix}kapankah
+│◦〉 ${prefix}gbtku
+│◦〉 ${prefix}bisakah
+│◦〉 ${prefix}tictactoe
+│◦〉 ${prefix}afk
+│◦〉 ${prefix}suitpvp
 ╰────────────────⊱`
             let ments = [ownernya, me, ini_mark]
             let buttons = [{ buttonId: 'owner', buttonText: { displayText: '⌕ Owner' }, type: 1 },{ buttonId: 'ping', buttonText: { displayText: '⌕ Info Bot' }, type: 1 }]
@@ -1360,18 +1555,6 @@ case 'bot': {
                list = ['./sound/oy.mp3','./sound/kenapa.mp3','./sound/iya.mp3']
  random = list[Math.floor(Math.random() * list.length)]
 goblok = fs.readFileSync(random)
-volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
-break
-case 'kontol': {
-               goblok = fs.readFileSync('./sound/ASADE.mp3')
-volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
-break
-case 'menyesal': {
-               goblok = fs.readFileSync('./sound/menyesal.mp3')
-volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
-break
-case 'sc': {
-               goblok = fs.readFileSync('./sound/sc.mp3')
 volter.sendMessage(m.chat, {audio: goblok, mimetype:'audio/mpeg', ptt:true }, {quoted:m})}
 break
             case 'sound1':
