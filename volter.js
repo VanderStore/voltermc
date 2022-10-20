@@ -1234,6 +1234,18 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             
 //PEMBATAS=================VOLTER======================
+            case 'yts': case 'ytsearch': {
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
+                let no = 1
+                for (let i of search.all) {
+                    teks += `⭔ No : ${no++}\n⭔ Type : ${i.type}\n⭔ Video ID : ${i.videoId}\n⭔ Title : ${i.title}\n⭔ Views : ${i.views}\n⭔ Duration : ${i.timestamp}\n⭔ Upload At : ${i.ago}\n⭔ Author : ${i.author.name}\n⭔ Url : ${i.url}\n\n─────────────────\n\n`
+                }
+                naze.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+            }
+            break
             case 'play': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
@@ -1262,8 +1274,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 volter.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             case 'ytmp3': case 'ytaudio': {
-            if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.data.users[m.sender].limit -= 1 // -1 limit
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 let quality = args[1] ? args[1] : '128kbps'
@@ -1506,7 +1516,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
  
  _Note : bot whatsapp iyalah bot hasil coding untuk berjalan sebagai kebutuhan di WhatsApp , bot whatsap mempunyai sistem unik , bisa membuat apa pun sesuai list commands_
  
-╭──❲ *NEW MENU* ❳
+ ╭──❲ *NEW MENU* ❳
 │◦〉 ${prefix}menfess
 ╰────────────────⊱
 
@@ -1522,7 +1532,6 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
 ╰────────────────⊱
 
 ╭──❲ *CONVERT MENU* ❳
-│◦〉 ${prefix}attp
 │◦〉 ${prefix}toimage
 │◦〉 ${prefix}sticker
 │◦〉 ${prefix}removebg
