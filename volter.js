@@ -1506,7 +1506,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
  
  _Note : bot whatsapp iyalah bot hasil coding untuk berjalan sebagai kebutuhan di WhatsApp , bot whatsap mempunyai sistem unik , bisa membuat apa pun sesuai list commands_
  
- ╭──❲ *NEW MENU* ❳
+╭──❲ *NEW MENU* ❳
 │◦〉 ${prefix}menfess
 ╰────────────────⊱
 
@@ -1522,6 +1522,7 @@ let buttons = [{ buttonId: 'menu', buttonText: { displayText: '⌕ List Menu' },
 ╰────────────────⊱
 
 ╭──❲ *CONVERT MENU* ❳
+│◦〉 ${prefix}attp
 │◦〉 ${prefix}toimage
 │◦〉 ${prefix}sticker
 │◦〉 ${prefix}removebg
