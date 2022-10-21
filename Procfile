@@ -1,1 +1,1 @@
-worker: node . --db 'mongodb+srv://VolterDeveloper:VolterStore2211@volter0.u9u6iqe.mongodb.net/?retryWrites=true&w=majority'
+worker: npm install -g pm2 && pm2 start main.js && pm2 save && pm2 logs
