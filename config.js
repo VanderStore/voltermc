@@ -22,7 +22,7 @@ global.premium = ['12232080470','12232080470','6287723814311']
 global.packname = 'Volter'
 global.author = 'Botz'
 global.sessionName = 'volter'
-global.prefa = [','!','.','#','&']
+global.prefa = [','.','#','&']
 global.sp = '-'
 global.mess = {
     success: '*_Done Kack_*',
