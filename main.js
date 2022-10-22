@@ -129,7 +129,10 @@ async function startVolter() {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
 
+                let buttons = [{ buttonId: 'owner', buttonText: { displayText: '👤Owner' }, type: 1 },{ buttonId: 'rules', buttonText: { displayText: '❗Rules' }, type: 1 }]
+                let nyoutube = ('© Volter Botz')
                 if (anu.action == 'add') {
+                    volter.sendMessage(anu.id, { image: { url: ppuser }, fileLength: jumhal, contextInfo: { mentionedJid: [num] }, caption: `*Hai Kak @${num.split("@")[0]}*\n*Selamat Datang Di Grup ${metadata.subject}*\n\n*Intro Dulu Yuk*\n\n*➪ Nama:*\n*➪ Umur:*\n*➪ Askot:*\n\n*Jangan Lupa Baca Dan Patuhi Peraturan Yang Ada`, buttons: buttons, footer: nyoutube})
                 } else if (anu.action == 'promote') {
                     volter.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `*@${num.split('@')[0]} Berhasil Di Naikan Jadi Admin ${metadata.subject}*` })
                 } else if (anu.action == 'demote') {
